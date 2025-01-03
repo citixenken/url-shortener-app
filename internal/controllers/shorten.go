@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"github.com/citixenken/url-shortener-app/internal/url"
 	"html/template"
 	"net/http"
 	"strings"
@@ -23,9 +24,10 @@ func Shorten(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// shorten URL
+	shortURL := url.Shorten(originalURL)
 
 	data := map[string]string{
-		"ShortURL": originalURL,
+		"ShortURL": shortURL,
 	}
 
 	tmpl, err := template.ParseFiles("internal/views/shorten.html")
